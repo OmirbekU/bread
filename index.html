@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BreadForPeople — Интерактивная витрина ремесленного хлеба</title>
+  <meta name="description" content="Откройте для себя мир ремесленного хлеба. Интерактивный 3D-каталог с рецептами, историями и вкусами каждого хлеба." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light-theme">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo__icon">🍞</span>
+        <span class="logo__text">BreadForPeople</span>
+      </a>
+
+      <nav class="nav" id="main-nav">
+        <a href="#hero" class="nav__link" id="nav-home">Главная</a>
+        <a href="#catalog" class="nav__link" id="nav-catalog">Виды хлеба</a>
+        <a href="#how-it-works" class="nav__link" id="nav-about">О хлебе</a>
+        <a href="#footer" class="nav__link" id="nav-contacts">Контакты</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-toggle__icon theme-toggle__sun">☀️</span>
+        <span class="theme-toggle__icon theme-toggle__moon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg-circles">
+      <div class="circle circle--1"></div>
+      <div class="circle circle--2"></div>
+      <div class="circle circle--3"></div>
+    </div>
+
+    <div class="hero__content container">
+      <div class="hero__3d-wrapper">
+        <div class="hero__canvas-container">
+          <canvas id="bread-canvas"></canvas>
+        </div>
+        <div class="hero__drag-hint" id="drag-hint">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+          </svg>
+          Зажмите и тяните, чтобы поворачивать
+        </div>
+      </div>
+
+      <div class="hero__text">
+        <h1 class="hero__title">Хлеб — всему голова</h1>
+        <p class="hero__subtitle">Откройте для себя богатый мир хлебных традиций.<br>Каждый хлеб — своя история, свой характер и особый вкус.</p>
+        <a href="#catalog" class="btn btn--primary" id="hero-cta">
+          Смотреть виды хлеба
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- ========== CATALOG ========== -->
+  <section class="catalog" id="catalog">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Виды хлеба</h2>
+        <p class="section-subtitle">Интерактивный каталог — нажмите на хлеб, чтобы узнать подробнее</p>
+      </div>
+
+      <div class="catalog__grid" id="catalog-grid">
+
+        <!-- Багет -->
+        <article class="bread-card" id="card-baguette" data-bread="baguette" tabindex="0" role="button" aria-label="Открыть информацию о Багете">
+          <div class="bread-card__img-wrap">
+            <img src="images/baguette.png" alt="Багет" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Багет</h3>
+            <p class="bread-card__desc">Классический французский хлеб с хрустящей корочкой и воздушным мякишем. Идеально к завтраку или с сыром.</p>
+          </div>
+          <div class="bread-card__badge badge--easy">★ Лёгкий</div>
+        </article>
+
+        <!-- Бородинский -->
+        <article class="bread-card" id="card-borodino" data-bread="borodino" tabindex="0" role="button" aria-label="Открыть информацию о Бородинском">
+          <div class="bread-card__img-wrap">
+            <img src="images/borodino.png" alt="Бородинский" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Бородинский</h3>
+            <p class="bread-card__desc">Ржаной хлеб с тмином и кориандром. Насыщенный вкус советской классики, любимый поколениями.</p>
+          </div>
+          <div class="bread-card__badge badge--medium">★★ Средний</div>
+        </article>
+
+        <!-- Закваска -->
+        <article class="bread-card" id="card-sourdough" data-bread="sourdough" tabindex="0" role="button" aria-label="Открыть информацию о Закваске">
+          <div class="bread-card__img-wrap">
+            <img src="images/sourdough.png" alt="Закваска" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Закваска</h3>
+            <p class="bread-card__desc">Хлеб на натуральной закваске. Долгое брожение создаёт неповторимую кислинку и плотный мякиш с дырочками.</p>
+          </div>
+          <div class="bread-card__badge badge--hard">★★★ Сложный</div>
+        </article>
+
+        <!-- Чиабатта -->
+        <article class="bread-card" id="card-ciabatta" data-bread="ciabatta" tabindex="0" role="button" aria-label="Открыть информацию о Чиабатте">
+          <div class="bread-card__img-wrap">
+            <img src="images/ciabatta.png" alt="Чиабатта" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Чиабатта</h3>
+            <p class="bread-card__desc">Итальянская пористая лепёшка с хрустящей корочкой. Пористая структура мякиша отлично впитывает масло и соусы.</p>
+          </div>
+          <div class="bread-card__badge badge--medium">★★ Средний</div>
+        </article>
+
+        <!-- Ржаной -->
+        <article class="bread-card" id="card-rye" data-bread="rye" tabindex="0" role="button" aria-label="Открыть информацию о Ржаном хлебе">
+          <div class="bread-card__img-wrap">
+            <img src="images/rye.png" alt="Ржаной" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Ржаной</h3>
+            <p class="bread-card__desc">Плотный хлеб из ржаной муки. Тёмный цвет, насыщенный вкус и высокое содержание клетчатки делают его особенно полезным.</p>
+          </div>
+          <div class="bread-card__badge badge--easy">★ Лёгкий</div>
+        </article>
+
+        <!-- Бриошь -->
+        <article class="bread-card" id="card-brioche" data-bread="brioche" tabindex="0" role="button" aria-label="Открыть информацию о Бриоши">
+          <div class="bread-card__img-wrap">
+            <img src="images/brioche.png" alt="Бриошь" class="bread-card__img" loading="lazy" />
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Бриошь</h3>
+            <p class="bread-card__desc">Нежная французская выпечка с маслом и яйцами. Тает во рту, чуть сладковатая — идеальна к чаю или для десерта.</p>
+          </div>
+          <div class="bread-card__badge badge--medium">★★ Средний</div>
+        </article>
+
+        <!-- Пита -->
+        <article class="bread-card" id="card-pita" data-bread="pita" tabindex="0" role="button" aria-label="Открыть информацию о Пите">
+          <div class="bread-card__img-wrap">
+            <div class="bread-card__svg-placeholder">
+              <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="60" cy="50" rx="50" ry="30" fill="#F5E6C8" stroke="#E8C878" stroke-width="2"/>
+                <ellipse cx="60" cy="48" rx="48" ry="28" fill="#F9EDD5"/>
+                <ellipse cx="60" cy="46" rx="35" ry="18" fill="#F5E6C8" opacity="0.6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Пита</h3>
+            <p class="bread-card__desc">Круглая лепёшка с «кармашком» внутри. Популярна на Ближнем Востоке — подходит как основа для закусок и сэндвичей.</p>
+          </div>
+          <div class="bread-card__badge badge--easy">★ Лёгкий</div>
+        </article>
+
+        <!-- Фокачча -->
+        <article class="bread-card" id="card-focaccia" data-bread="focaccia" tabindex="0" role="button" aria-label="Открыть информацию о Фокачче">
+          <div class="bread-card__img-wrap">
+            <div class="bread-card__svg-placeholder">
+              <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="20" width="100" height="55" rx="12" fill="#E8C87A" stroke="#D4A83C" stroke-width="2"/>
+                <rect x="10" y="20" width="100" height="50" rx="12" fill="#F2D680"/>
+                <circle cx="30" cy="38" r="4" fill="#D4A83C"/>
+                <circle cx="55" cy="32" r="4" fill="#D4A83C"/>
+                <circle cx="80" cy="38" r="4" fill="#D4A83C"/>
+                <circle cx="42" cy="52" r="4" fill="#D4A83C"/>
+                <circle cx="68" cy="50" r="4" fill="#D4A83C"/>
+                <line x1="25" y1="30" x2="35" y2="25" stroke="#6B8C42" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="75" y1="30" x2="85" y2="25" stroke="#6B8C42" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="bread-card__body">
+            <h3 class="bread-card__name">Фокачча</h3>
+            <p class="bread-card__desc">Итальянская лепёшка с оливковым маслом и розмарином. Мягкая, ароматная, с характерными ямочками на поверхности.</p>
+          </div>
+          <div class="bread-card__badge badge--easy">★ Лёгкий</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Как это работает?</h2>
+        <p class="section-subtitle">От зерна до стола — три простых шага</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card" id="step-1">
+          <div class="step-card__icon">🌾</div>
+          <h3 class="step-card__title">Выберите хлеб</h3>
+          <p class="step-card__desc">Нажмите на любой хлеб в каталоге — откроется подробная карточка с историей, составом и способом приготовления.</p>
+        </div>
+        <div class="step-card" id="step-2">
+          <div class="step-card__icon">📖</div>
+          <h3 class="step-card__title">Изучите рецепт</h3>
+          <p class="step-card__desc">Пошаговый рецепт с указанием времени, ингредиентов и уровня сложности. Всё для домашней выпечки.</p>
+        </div>
+        <div class="step-card" id="step-3">
+          <div class="step-card__icon">🔥</div>
+          <h3 class="step-card__title">Испеките сами</h3>
+          <p class="step-card__desc">Следуйте инструкции и наслаждайтесь ароматом свежего хлеба прямо у себя на кухне.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIFFICULTY ========== -->
+  <section class="difficulty" id="difficulty">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Насколько тяжело?</h2>
+        <p class="section-subtitle">Хлеб для каждого уровня — от новичка до мастера</p>
+      </div>
+      <div class="difficulty-grid">
+        <div class="difficulty-card difficulty-card--easy" id="diff-easy">
+          <div class="difficulty-card__stars">★</div>
+          <h3 class="difficulty-card__level">Лёгкий</h3>
+          <p class="difficulty-card__role">Начинающий</p>
+          <p class="difficulty-card__desc">Багет, фокачча, пита — простые рецепты для первых шагов в хлебопечении.</p>
+        </div>
+        <div class="difficulty-card difficulty-card--medium" id="diff-medium">
+          <div class="difficulty-card__stars">★★</div>
+          <h3 class="difficulty-card__level">Средний</h3>
+          <p class="difficulty-card__role">Любитель</p>
+          <p class="difficulty-card__desc">Бородинский, чиабатта — требуют внимания к процессу брожения и формовке.</p>
+        </div>
+        <div class="difficulty-card difficulty-card--hard" id="diff-hard">
+          <div class="difficulty-card__stars">★★★</div>
+          <h3 class="difficulty-card__level">Сложный</h3>
+          <p class="difficulty-card__role">Мастер</p>
+          <p class="difficulty-card__desc">Хлеб на закваске — долгий процесс, точные температуры, высокое мастерство.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo__icon">🍞</span>
+        <span class="logo__text">BreadForPeople</span>
+        <p class="footer__tagline">Хлеб — всему голова</p>
+      </div>
+      <div class="footer__links">
+        <a href="#hero" class="footer__link">Главная</a>
+        <a href="#catalog" class="footer__link">Виды хлеба</a>
+        <a href="#how-it-works" class="footer__link">О хлебе</a>
+      </div>
+      <div class="footer__contacts">
+        <p>📧 hello@breadforpeople.ru</p>
+        <p>📍 Москва, Россия</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 BreadForPeople. Сделано с ❤️ и мукой.</p>
+    </div>
+  </footer>
+
+  <!-- ========== MODAL ========== -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modal-close" aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="modal__content" id="modal-content">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
